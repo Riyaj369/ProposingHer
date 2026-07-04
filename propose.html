@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Proposal Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, #14070c 0%, #050204 100%);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Luxury Minimalist Card Structure */
+        .card {
+            background: rgba(13, 6, 9, 0.8);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 77, 121, 0.18);
+            padding: 55px 35px;
+            border-radius: 32px;
+            text-align: center;
+            color: #ffffff;
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.85), 0 0 60px rgba(255, 77, 121, 0.05);
+            max-width: 370px;
+            width: 90%;
+            z-index: 10;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        /* Cherry Blossom Corner Ornament matching your image */
+        .corner-flower {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            font-size: 2.4rem;
+            filter: drop-shadow(0 0 15px rgba(255, 77, 121, 0.7));
+            animation: gentleFloat 4s ease-in-out infinite;
+            z-index: 12;
+            pointer-events: none;
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-5px) rotate(8deg) scale(1.05); }
+        }
+
+        .header-tag {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #ff4d79;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .sender {
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            color: rgba(255, 255, 255, 0.55);
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+            margin-bottom: 15px;
+            line-height: 1.25;
+            background: linear-gradient(180deg, #ffffff 0%, #fff0f3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtext {
+            font-size: 1.15rem;
+            color: #ffffff;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 400;
+        }
+
+        .game-box {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 24px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            position: relative;
+        }
+
+        .game-hint {
+            font-size: 0.8rem;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            min-height: 70px;
+            width: 100%;
+        }
+
+        button {
+            width: 120px;
+            height: 46px;
+            border-radius: 40px;
+            border: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        #yesBtn {
+            background: #ffffff;
+            color: #0d0609;
+            box-shadow: 0 4px 25px rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 50; /* Ensures Yes button always remains clickable on top layer */
+        }
+
+        #noBtn {
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: absolute;
+            z-index: 5; /* Keeps No button layered underneath the Yes bubble */
+            right: 15px;
+        }
+
+        /* Infinite Fallback Animation Layout */
+        .gif-placeholder {
+            width: 160px;
+            height: 120px;
+            margin: 25px auto 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .heart-icon {
+            font-size: 4rem;
+            animation: beat 0.8s infinite alternate;
+            filter: drop-shadow(0 0 15px #ff4d79);
+        }
+
+        @keyframes beat {
+            to { transform: scale(1.25); }
+        }
+
+        /* Interactive Particle Fields */
+        .particle {
+            position: absolute;
+            bottom: -50px;
+            opacity: 0;
+            pointer-events: none;
+            animation: riseUp 6s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes riseUp {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+            15% { opacity: 0.8; }
+            85% { opacity: 0.8; }
+            100% { transform: translateY(-115vh) translateX(var(--drift)) rotate(var(--rot)); opacity: 0; }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            z-index: 2;
+            animation: burst 1.2s cubic-bezier(0.1, 0.8, 0.25, 1) forwards;
+        }
+
+        @keyframes burst {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--x), var(--y)) scale(0) rotate(var(--r)); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="mainCard">
+        <div class="corner-flower">🌸</div>
+        <div class="header-tag">Proposal</div>
+        <div class="sender">From: Your riyajey</div>
+        <h1>Will you forever be mine?</h1>
+        <div class="subtext">Saloni 💝</div>
+
+        <div class="game-box">
+            <div class="game-hint">Shhh, xito dubau tyo button 😛</div>
+            
+            <div class="btn-container" id="btnContainer">
+                <button id="yesBtn">Yes ❤️</button>
+                <button id="noBtn">No 🌚</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const container = document.getElementById('btnContainer');
+        const card = document.getElementById('mainCard');
+
+        let yesScale = 1;
+
+        // Smart system protecting Yes button from interception layers
+        function escapeButton(e) {
+            if (e) e.preventDefault(); 
+
+            yesScale += 0.25;
+            yesBtn.style.transform = `scale(${yesScale})`;
+
+            const btnWidth = noBtn.offsetWidth;
+            const btnHeight = noBtn.offsetHeight;
+            const yesRect = yesBtn.getBoundingClientRect();
+            
+            let safeX, safeY;
+            let overlapping = true;
+
+            while (overlapping) {
+                safeX = Math.floor(Math.random() * (window.innerWidth - btnWidth - 40)) + 20;
+                safeY = Math.floor(Math.random() * (window.innerHeight - btnHeight - 40)) + 20;
+
+                const safetyBuffer = 50; 
+                if (
+                    safeX + btnWidth < yesRect.left - safetyBuffer ||
+                    safeX > yesRect.right + safetyBuffer ||
+                    safeY + btnHeight < yesRect.top - safetyBuffer ||
+                    safeY > yesRect.bottom + safetyBuffer
+                ) {
+                    overlapping = false; 
+                }
+            }
+
+            noBtn.style.position = 'fixed';
+            noBtn.style.right = 'auto';
+            noBtn.style.left = safeX + 'px';
+            noBtn.style.top = safeY + 'px';
+        }
+
+        noBtn.addEventListener('mouseover', escapeButton);
+        noBtn.addEventListener('touchstart', escapeButton);
+        noBtn.addEventListener('click', escapeButton);
+
+        // Success transition state updated flawlessly to reflect your images
+        yesBtn.addEventListener('click', () => {
+            noBtn.remove();
+
+            card.innerHTML = `
+                <div class="corner-flower">🌸</div>
+                <div class="header-tag" style="color: #ff4d79;">VAMOSSS! 🥳</div>
+                <h1 style="font-family: 'Playfair Display', serif; font-size: 2.6rem;">I knew you'd say YES! 🤍</h1>
+                <div class="subtext" style="margin-bottom: 10px; color: rgba(255,255,255,0.7); font-size: 1.1rem;">
+                    Lovee youu Raiiii 😭
+                </div>
+                <div class="gif-placeholder">
+                    <div class="heart-icon">😽</div>
+                </div>
+            `;
+
+            // Initialize celebration system loops
+            setInterval(spawnParticle, 180);
+            triggerConfettiCannon(window.innerWidth * 0.12, window.innerHeight * 0.6, 1);
+            triggerConfettiCannon(window.innerWidth * 0.88, window.innerHeight * 0.6, -1);
+        });
+
+        // Atmospheric continuous engine setup
+        function spawnParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            const elements = [
+                { val: '🎈', style: 'drop-shadow(0 0 5px rgba(255,77,121,0.3))' },
+                { val: '🎈', style: 'hue-rotate(280deg)' },
+                { val: '🎈', style: 'hue-rotate(50deg)' },
+                { val: '🌸', style: '' },
+                { val: '💖', style: '' },
+                { val: '✨', style: '' },
+                { val: '🥳', style: '' }
+            ];
+
+            const chosen = elements[Math.floor(Math.random() * elements.length)];
+            particle.innerText = chosen.val;
+            if(chosen.style) particle.style.filter = chosen.style;
+
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.fontSize = (Math.random() * 1.3 + 1.2) + 'rem';
+            particle.style.setProperty('--drift', (Math.random() * 140 - 70) + 'px');
+            particle.style.setProperty('--rot', (Math.random() * 90 - 45) + 'deg');
+            particle.style.animationDuration = (Math.random() * 2 + 4) + 's';
+
+            document.body.appendChild(particle);
+            setTimeout(() => particle.remove(), 6000);
+        }
+
+        // Side confetti bursting generators
+        function triggerConfettiCannon(x, y, direction) {
+            const colors = ['#ff4d79', '#ffb3c6', '#ffffff', '#ffd700'];
+            
+            for (let i = 0; i < 70; i++) {
+                const item = document.createElement('div');
+                item.classList.add('confetti');
+                item.style.left = x + 'px';
+                item.style.top = y + 'px';
+                item.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                const angleX = (Math.random() * 280 + 70) * direction;
+                const angleY = (Math.random() * -350) - 90;
+                const rotate = Math.random() * 720;
+
+                item.style.setProperty('--x', `${angleX}px`);
+                item.style.setProperty('--y', `${angleY}px`);
+                item.style.setProperty('--r', `${rotate}deg`);
+
+                document.body.appendChild(item);
+                setTimeout(() => item.remove(), 1200);
+            }
+        }
+    </script>
+</body>
+</html>
