@@ -115,12 +115,12 @@
         /* Fixed Mobile Overlapping Flex Container Layout */
         .btn-container {
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             align-items: center;
             position: relative;
             min-height: 70px;
             width: 100%;
-            gap: 10px;
+            gap: 20px; /* Gives perfect separation on load */
         }
 
         button {
@@ -149,7 +149,7 @@
             background: rgba(255, 255, 255, 0.05);
             color: rgba(255, 255, 255, 0.85);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative; /* Keeps it naturally spaced until first interaction */
+            position: relative; /* Kept relative on start so it does not default overlap */
             z-index: 5; 
         }
 
@@ -232,7 +232,7 @@
 
         let yesScale = 1;
 
-        // Optimized bounding checks to prevent mobile layout overlap
+        // Bounding checks to keep everything completely inside viewport frames
         function escapeButton(e) {
             if (e) e.preventDefault(); 
 
@@ -247,7 +247,6 @@
             let overlapping = true;
 
             while (overlapping) {
-                // Keep coordinates firmly constrained inside active window viewports
                 safeX = Math.floor(Math.random() * (window.innerWidth - btnWidth - 40)) + 20;
                 safeY = Math.floor(Math.random() * (window.innerHeight - btnHeight - 40)) + 20;
 
@@ -262,6 +261,7 @@
                 }
             }
 
+            // Flips position type safely only when interaction starts
             noBtn.style.position = 'fixed';
             noBtn.style.left = safeX + 'px';
             noBtn.style.top = safeY + 'px';
