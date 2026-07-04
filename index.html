@@ -112,17 +112,19 @@
             color: rgba(255, 255, 255, 0.35);
         }
 
+        /* Fixed Mobile Overlapping Flex Container Layout */
         .btn-container {
             display: flex;
-            justify-content: center;
+            justify-content: space-around;
             align-items: center;
             position: relative;
             min-height: 70px;
             width: 100%;
+            gap: 10px;
         }
 
         button {
-            width: 120px;
+            width: 110px;
             height: 46px;
             border-radius: 40px;
             border: none;
@@ -140,16 +142,15 @@
             color: #0d0609;
             box-shadow: 0 4px 25px rgba(255, 255, 255, 0.2);
             position: relative;
-            z-index: 50; /* Ensures Yes button always remains clickable on top layer */
+            z-index: 50; 
         }
 
         #noBtn {
             background: rgba(255, 255, 255, 0.05);
             color: rgba(255, 255, 255, 0.85);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            position: absolute;
-            z-index: 5; /* Keeps No button layered underneath the Yes bubble */
-            right: 15px;
+            position: relative; /* Keeps it naturally spaced until first interaction */
+            z-index: 5; 
         }
 
         /* Infinite Fallback Animation Layout */
@@ -231,7 +232,7 @@
 
         let yesScale = 1;
 
-        // Smart system protecting Yes button from interception layers
+        // Optimized bounding checks to prevent mobile layout overlap
         function escapeButton(e) {
             if (e) e.preventDefault(); 
 
@@ -246,10 +247,11 @@
             let overlapping = true;
 
             while (overlapping) {
+                // Keep coordinates firmly constrained inside active window viewports
                 safeX = Math.floor(Math.random() * (window.innerWidth - btnWidth - 40)) + 20;
                 safeY = Math.floor(Math.random() * (window.innerHeight - btnHeight - 40)) + 20;
 
-                const safetyBuffer = 50; 
+                const safetyBuffer = 60; 
                 if (
                     safeX + btnWidth < yesRect.left - safetyBuffer ||
                     safeX > yesRect.right + safetyBuffer ||
@@ -261,16 +263,15 @@
             }
 
             noBtn.style.position = 'fixed';
-            noBtn.style.right = 'auto';
             noBtn.style.left = safeX + 'px';
             noBtn.style.top = safeY + 'px';
         }
 
         noBtn.addEventListener('mouseover', escapeButton);
-        noBtn.addEventListener('touchstart', escapeButton);
+        noBtn.addEventListener('touchstart', escapeButton, { passive: false });
         noBtn.addEventListener('click', escapeButton);
 
-        // Success transition state updated flawlessly to reflect your images
+        // Success transition state
         yesBtn.addEventListener('click', () => {
             noBtn.remove();
 
