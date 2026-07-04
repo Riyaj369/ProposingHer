@@ -26,17 +26,20 @@
             position: relative;
         }
 
-        /* Luxury Minimalist Card Structure */
+        /* Luxury Minimalist Card Structure with Enhanced Brighter Border Glow */
         .card {
-            background: rgba(13, 6, 9, 0.8);
+            background: rgba(13, 6, 9, 0.85);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 77, 121, 0.18);
+            border: 2px solid rgba(255, 77, 121, 0.7); /* Brighter border line */
             padding: 55px 35px;
             border-radius: 32px;
             text-align: center;
             color: #ffffff;
-            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.85), 0 0 60px rgba(255, 77, 121, 0.05);
+            /* Vibrant, amplified drop shadow and outer glow combination */
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.85), 
+                        0 0 40px rgba(255, 77, 121, 0.4), 
+                        inset 0 0 15px rgba(255, 77, 121, 0.1);
             max-width: 370px;
             width: 90%;
             z-index: 10;
@@ -112,7 +115,7 @@
             color: rgba(255, 255, 255, 0.35);
         }
 
-        /* Fixed Mobile Overlapping Flex Container Layout */
+        /* Fixed Separation Container Engine */
         .btn-container {
             display: flex;
             justify-content: center;
@@ -120,7 +123,7 @@
             position: relative;
             min-height: 70px;
             width: 100%;
-            gap: 20px; /* Gives perfect separation on load */
+            gap: 25px; /* Clean dynamic separation space */
         }
 
         button {
@@ -131,7 +134,7 @@
             font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
-            display: flex;
+            display: inline-flex; /* Ensures text stays centered without breaking button positions */
             justify-content: center;
             align-items: center;
             transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -149,7 +152,7 @@
             background: rgba(255, 255, 255, 0.05);
             color: rgba(255, 255, 255, 0.85);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative; /* Kept relative on start so it does not default overlap */
+            position: relative; /* Kept completely fluid in the layout grid until hovered */
             z-index: 5; 
         }
 
@@ -232,7 +235,7 @@
 
         let yesScale = 1;
 
-        // Bounding checks to keep everything completely inside viewport frames
+        // Perfect system preventing collision boxes on mobile screens
         function escapeButton(e) {
             if (e) e.preventDefault(); 
 
@@ -250,7 +253,7 @@
                 safeX = Math.floor(Math.random() * (window.innerWidth - btnWidth - 40)) + 20;
                 safeY = Math.floor(Math.random() * (window.innerHeight - btnHeight - 40)) + 20;
 
-                const safetyBuffer = 60; 
+                const safetyBuffer = 65; 
                 if (
                     safeX + btnWidth < yesRect.left - safetyBuffer ||
                     safeX > yesRect.right + safetyBuffer ||
@@ -261,7 +264,7 @@
                 }
             }
 
-            // Flips position type safely only when interaction starts
+            // Only turns into fixed position dynamically when running away
             noBtn.style.position = 'fixed';
             noBtn.style.left = safeX + 'px';
             noBtn.style.top = safeY + 'px';
